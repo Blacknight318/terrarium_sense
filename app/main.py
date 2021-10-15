@@ -13,8 +13,7 @@ def read_ds_sensor():
         return b'0.0'
     
 
-def wifi_connect():
-    wifi = network.WLAN(network.STA_IF)
+def wifi_connect(wifi):
     if not wifi.isconnected():
         print('connecting to wireless ', secrets.ssid)
         wifi.active(True)
@@ -35,13 +34,14 @@ def send_to_mqtt_server(mqtt_client, mqtt_feed, temperature):
         pass
 
 
-wifi_connect()
+wifi_setup = network.WLAN(network.STA_IF)
+wifi_connect(wifi_setup)
 mqtt_client_id = bytes('client_'+str(int.from_bytes(os.urandom(3), 'little')), 'utf-8')
 mqtt_feedname = bytes('{:s}/feeds/{:s}'.format(secrets.mqtt_username, secrets.mqtt_temperature_topic), 'utf-8')
 
 while True:
-    if not wifi.isconnected() == True:
-        wifi_connect()
+    if not wifi.isconnected():
+        wifi_connect(wifi_setup)
     try:
         if gc.mem_free() < 102000:
             gc.collect()
