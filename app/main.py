@@ -52,5 +52,6 @@ while True:
         print(e)
     if not ota.fetch() == True:
         ota.update()
+        print('Update found, attempting restart!')
         machine.reset()
     sleep(60)
