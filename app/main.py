@@ -48,7 +48,7 @@ while True:
         send_to_mqtt_server(mqtt_client_id, mqtt_feedname, temp)
     except OSError as e:
         print(e)
-    if ota_check == True:
+    if not ota.fetch() == True:
         ota.update()
         machine.reset()
     sleep(60)
