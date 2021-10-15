@@ -1,3 +1,4 @@
+# Version 1.0.0
 # This file is executed on every boot (including wake-boot from deepsleep)
 import esp
 import os
