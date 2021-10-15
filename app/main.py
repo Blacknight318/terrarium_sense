@@ -40,7 +40,7 @@ mqtt_client_id = bytes('client_'+str(int.from_bytes(os.urandom(3), 'little')), '
 mqtt_feedname = bytes('{:s}/feeds/{:s}'.format(secrets.mqtt_username, secrets.mqtt_temperature_topic), 'utf-8')
 
 while True:
-    if not wifi.isconnected():
+    if not wifi_setup.isconnected():
         wifi_connect(wifi_setup)
     try:
         if gc.mem_free() < 102000:
@@ -51,7 +51,7 @@ while True:
         send_to_mqtt_server(mqtt_client_id, mqtt_feedname, tempf)
     except OSError as e:
         print(e)
-    if not ota.fetch():
+    if ota.fetch():
         ota.update()
         print('Update found, attempting restart!')
         machine.reset()
