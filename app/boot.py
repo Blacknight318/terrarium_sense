@@ -20,4 +20,4 @@ ds_sensor = ds18x20.DS18X20(onewire.OneWire(ds_pin))
 # Senko OTA setup
 import senko
 github_url = 'https://github.com/Blacknight318/terrarium_sense'
-ota = senko.Senko(url=github_url, files=['boot.py', 'main.py'])
+ota = senko.Senko(user='Blacknight318', repo='terrarium_sense',  working_dir='app', files=['boot.py', 'main.py'])
