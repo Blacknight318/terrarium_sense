@@ -46,8 +46,9 @@ while True:
         if gc.mem_free() < 102000:
             gc.collect()
         temp = read_ds_sensor()
-        print(round(temp*(9/5)+32, 2))
-        send_to_mqtt_server(mqtt_client_id, mqtt_feedname, temp)
+        tempf = round(temp*(9/5)+32, 2)
+        print(tempf)
+        send_to_mqtt_server(mqtt_client_id, mqtt_feedname, tempf)
     except OSError as e:
         print(e)
     if not ota.fetch():
