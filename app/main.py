@@ -40,6 +40,8 @@ mqtt_client_id = bytes('client_'+str(int.from_bytes(os.urandom(3), 'little')), '
 mqtt_feedname = bytes('{:s}/feeds/{:s}'.format(secrets.mqtt_username, secrets.mqtt_temperature_topic), 'utf-8')
 
 while True:
+    if not wifi.isconnected() == True:
+        wifi_connect()
     try:
         if gc.mem_free() < 102000:
             gc.collect()
