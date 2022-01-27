@@ -131,3 +131,5 @@ app/senko.py
 app/umqttsimple.py
 .gitignore
 .gitignore
+app/secrets.py
+app/webreply_cfg.py
